@@ -1,0 +1,18 @@
+/* Global Styles */
+body {
+    font-family: 'Aeonik', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --black-bg: #080225;
+    --secondary-color: #fff;
+    --accent-color: #f39c12;
+    --accent-hover-color: #e67e22;
+}
+
+main {
+    padding-left: 16px;
+    padding-right: 16px;
+}

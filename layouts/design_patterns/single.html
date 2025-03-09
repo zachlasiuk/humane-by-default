@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    <p><strong>User Goal:</strong> {{ .Params.user_goal }}</p>
+    <p><strong>Business Objective:</strong> {{ .Params.business_objective }}</p>
+    <p><strong>Harmful or Humane:</strong> {{ .Params.harmful_or_humane }}</p>
+    <p><strong>Values:</strong> {{ range .Params.values }}{{ . }} {{ end }}</p>
+    <p><strong>Explanation:</strong> {{ .Params.explanation }}</p>
+    <p><strong>Why It Matters:</strong> {{ .Params.why_it_matters }}</p>
+    <p><strong>Examples:</strong> {{ range .Params.examples }}{{ . }} {{ end }}</p>
+    <p><strong>How to Avoid:</strong> {{ .Params.how_to_avoid }}</p>
+    <p><strong>Alternative Designs:</strong> {{ range .Params.alternative_designs }}{{ . }} {{ end }}</p>
+  </article>
+{{ end }}

@@ -1,0 +1,398 @@
+{{ define "main" }}
+  <style>
+    /* Reset & global styling */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; }
+
+    /* Container for filter panel and content */
+    .container { display: flex; }
+
+    /* Filter panel (left side) for desktop */
+    .filter-panel {
+      width: 400px;
+      padding: 20px;
+      background: #f5f5f5;
+      position: relative;
+    }
+    .filter-panel h3 { margin-bottom: 15px; }
+    .filter-panel div { margin-bottom: 15px; }
+    .filter-panel label { display: block; margin-bottom: 5px; }
+
+    /* Hide the close button by default */
+    .filter-close { display: none; }
+
+    /* Mobile: hide filter panel behind a toggle using transform */
+    @media (max-width: 768px) {
+      .filter-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        width: 300px;
+        height: 100%;
+        background: #f5f5f5;
+        padding: 20px;
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+      }
+      .filter-panel.open {
+        transform: translateX(0);
+      }
+      /* Mobile close icon styles (only shown on mobile) */
+      .filter-close {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      /* Change container to vertical layout on mobile */
+      .container {
+        flex-direction: column;
+      }
+    }
+
+    /* Right side content */
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    /* Search bar container */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+    }
+    /* Mobile filter toggle inside search bar */
+    .mobile-filter-toggle {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mobile-filter-toggle {
+        display: inline-block;
+        margin-left: 10px;
+        padding: 10px 15px;
+        background: #007bff;
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+
+    /* Active filters container with reserved space */
+    .active-filters {
+      min-height: 40px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    /* "Filters:" label styled as plain light-grey text */
+    .active-filters .active-label {
+      margin-right: 10px;
+      font-weight: bold;
+      background: none;
+      padding: 0;
+      color: #888;
+    }
+    .active-filters span {
+      margin-right: 10px;
+      padding: 5px 10px;
+      background: #ddd;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .active-filters span button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+
+    /* Display count below active filters */
+    .display-count {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    /* Card grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1024px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+    .card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .card.harmful { background-color: #ffdddd; }
+    .card.humane { background-color: #ddffdd; }
+    .card img { max-width: 100%; display: block; margin-bottom: 10px; }
+  </style>
+
+  <div class="container">
+    <!-- Left: Filter panel -->
+    <aside class="filter-panel" id="filter-panel">
+      <!-- Mobile close icon -->
+      <button class="filter-close" onclick="toggleFilterPanel()">×</button>
+      <h3>Filters</h3>
+
+      <!-- Use-case filter (based on commonly_found_in) -->
+      <div>
+        <strong>Use-case</strong>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Social Media" value="social-media">
+          Social Media
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Streaming platforms" value="streaming-platforms">
+          Streaming platforms
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Content sites" value="content-heavy-sites">
+          Content sites
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Subscriptions" value="subscriptions">
+          Subscriptions
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="General" value="general">
+          General
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Sales" value="sales">
+          Sales
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Marketing" value="marketing">
+          Marketing
+        </label>
+      </div>
+
+      <!-- User goal filter -->
+      <div>
+        <strong>User goal</strong>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Consume information" value="consume-information">
+          Consume information
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Try a service" value="try-a-service">
+          Try a service
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Control privacy" value="control-privacy">
+          Control privacy
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Saying no" value="saying-no">
+          Saying no
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Making a decision" value="making-a-decision">
+          Making a decision
+        </label>
+      </div>
+
+      <!-- Business objective filter -->
+      <div>
+        <strong>Business objective</strong>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Increase engagement" value="increase-engagement">
+          Increase engagement
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Close sales" value="close-sales">
+          Close sales
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Sell user data" value="sell-user-data">
+          Sell user data
+        </label>
+      </div>
+
+      <!-- Values filter -->
+      <div>
+        <strong>Values</strong>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Agency" value="agency">
+          Agency
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Manipulation" value="manipulation">
+          Manipulation
+        </label>
+        <label>
+          <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Privacy" value="privacy">
+          Privacy
+        </label>
+      </div>
+    </aside>
+
+    <!-- Right: Search, active filters, display count, and cards -->
+    <div class="content">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search Design Patterns..." oninput="applyFilters()">
+        <!-- Mobile filter toggle button appears to the right of the search input -->
+        <button class="mobile-filter-toggle" onclick="toggleFilterPanel()">Filters</button>
+      </div>
+      
+      <!-- Active filters container with reserved space -->
+      <div class="active-filters" id="activeFilters">
+        <span class="active-label">Filters:</span>
+      </div>
+      <!-- Display count container -->
+      <div class="display-count" id="displayCount"></div>
+      
+      <div class="cards" id="cardsContainer">
+        {{ range .Pages }}
+          <div class="card 
+            {{ if eq (lower .Params.harmful_or_humane) "harmful" }}harmful{{ else }}humane{{ end }}
+            {{ with .Params.user_goal }} tag--{{ lower (replace . " " "-" ) }}{{ end }}
+            {{ with .Params.business_objective }} tag--{{ lower (replace . " " "-" ) }}{{ end }}
+            {{ range .Params.values }} tag--{{ lower (replace . " " "-" ) }}{{ end }}
+            {{ range .Params.commonly_found_in }} tag--{{ lower (replace . " " "-" ) }}{{ end }}">
+            <img src="{{ .Params.gif }}" alt="{{ .Title }}">
+            <h2>{{ .Title }}</h2>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle filter panel on mobile using transform
+    function toggleFilterPanel() {
+      var panel = document.getElementById('filter-panel');
+      panel.classList.toggle('open');
+    }
+
+    // Query elements for filtering
+    const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.card');
+    const activeFiltersContainer = document.getElementById('activeFilters');
+    const displayCountElem = document.getElementById('displayCount');
+
+    // Object to hold currently active filters (per filter type, store objects with value & display)
+    let activeFilters = {
+      usecase: [],
+      usergoal: [],
+      bizobj: [],
+      values: []
+    };
+
+    // Add event listeners to all checkboxes and search input
+    filterCheckboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        updateActiveFilters();
+        applyFilters();
+      });
+    });
+    searchInput.addEventListener('input', applyFilters);
+
+    function updateActiveFilters() {
+      // Reset active filters object
+      activeFilters = { usecase: [], usergoal: [], bizobj: [], values: [] };
+      filterCheckboxes.forEach(cb => {
+        if(cb.checked) {
+          const type = cb.getAttribute('data-filter-type');
+          activeFilters[type].push({
+            value: cb.value,
+            display: cb.getAttribute('data-display-name')
+          });
+        }
+      });
+      displayActiveFilters();
+    }
+
+    function displayActiveFilters() {
+      // Always show the "Filters:" label
+      activeFiltersContainer.innerHTML = '<span class="active-label">Filters:</span>';
+      for(const type in activeFilters) {
+        activeFilters[type].forEach(filterObj => {
+          const span = document.createElement('span');
+          span.textContent = filterObj.display + " ";
+          // Create remove button for each active filter
+          const removeBtn = document.createElement('button');
+          removeBtn.textContent = "×";
+          removeBtn.setAttribute('data-filter-type', type);
+          removeBtn.setAttribute('data-filter-value', filterObj.value);
+          removeBtn.onclick = function() {
+            // Uncheck the corresponding checkbox(es)
+            document.querySelectorAll('.filter-checkbox[data-filter-type="'+type+'"][value="'+filterObj.value+'"]').forEach(function(cb) {
+              cb.checked = false;
+            });
+            updateActiveFilters();
+            applyFilters();
+          };
+          span.appendChild(removeBtn);
+          activeFiltersContainer.appendChild(span);
+        });
+      }
+    }
+
+    function applyFilters() {
+      const searchTerm = searchInput.value.toLowerCase();
+      let visibleCount = 0;
+      
+      cards.forEach(card => {
+        let visible = true;
+
+        // Check if card matches each active filter category
+        for(const key in activeFilters) {
+          if(activeFilters[key].length > 0) {
+            let matchFound = false;
+            activeFilters[key].forEach(filterObj => {
+              if(card.classList.contains('tag--' + filterObj.value)) {
+                matchFound = true;
+              }
+            });
+            if(!matchFound) {
+              visible = false;
+            }
+          }
+        }
+
+        // Check search term in card's text content
+        if(searchTerm) {
+          const cardText = card.innerText.toLowerCase();
+          if(!cardText.includes(searchTerm)) {
+            visible = false;
+          }
+        }
+
+        card.style.display = visible ? '' : 'none';
+        if(visible) { visibleCount++; }
+      });
+      
+      // Update the display count text
+      displayCountElem.textContent = `Displaying ${visibleCount} of ${cards.length} design patterns`;
+    }
+
+    // Initial filter application to set display count text
+    applyFilters();
+  </script>
+{{ end }}

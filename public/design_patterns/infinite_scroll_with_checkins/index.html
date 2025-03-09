@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Humane By Default - </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+  </head>
+  <body>
+    <header class="site-header">
+    <nav class="main-nav">
+      <ul>
+        <li class="left-align"><a href="/"><img src="/img/logo.png" alt="Humane By Default Logo" style="height: 100px;"></a></li>
+        <li><a href="/design_patterns/">Design Patterns</a></li>
+        <li><a href="/business_models/">Business Models</a></li>
+        <li><a href="/resources/">Resources</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="https://github.com/YOUR_GH_REPO" target="_blank">GitHub</a></li>
+        <li>
+          <button class="contact-btn" onclick="document.getElementById('contact-modal').style.display='block'">
+            Contact Us
+          </button>
+        </li>
+      </ul>
+    </nav>
+</header>
+
+<div id="contact-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('contact-modal').style.display='none'">&times;</span>
+        <h2>Contact Us</h2>
+        <p>Sign up to help or get involved.</p>
+        
+        <form>
+        <label>Name</label>
+        <input type="text" name="name" />
+        <label>Email</label>
+        <input type="email" name="email" />
+        <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+
+<style>
+
+     
+    .site-header {
+        background-color: var(--black-bg);
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      
+   
+  .main-nav {
+    margin-top: 15px;
+  }
+  
+  .main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .main-nav li {
+    margin: 0 16px;
+  }
+  
+  .main-nav .left-align {
+    margin-right: auto;
+  }
+  
+  .main-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s;
+  }
+  
+  .main-nav a:hover {
+    color: #f39c12;
+  }
+  
+   
+  .contact-btn {
+    background-color: #f39c12;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .contact-btn:hover {
+    background-color: #e67e22;
+  }
+  
+   
+  @media (max-width: 768px) {
+    .main-nav ul {
+      flex-direction: column;
+    }
+    
+    .main-nav li {
+      margin: 10px 0;
+    }
+    
+    .main-nav .left-align {
+      margin-right: 0;
+    }
+  }
+  
+</style>
+
+    <main>
+      
+  <article>
+    <h1>Infinite Scroll with Checkins</h1>
+    <p><strong>User Goal:</strong> Consume information</p>
+    <p><strong>Business Objective:</strong> Increase engagement</p>
+    <p><strong>Harmful or Humane:</strong> Humane</p>
+    <p><strong>Values:</strong> Agency </p>
+    <p><strong>Explanation:</strong> </p>
+    <p><strong>Why It Matters:</strong> Creates positive friction, with a specific decision point for the user interrupting flow. Actually increases MEANINGFUL engagement, rousing people from their stupor to pay more attention.
+</p>
+    <p><strong>Examples:</strong> Netflix&#39;s &#34;Are you still watching?&#34; check-ins. TikTok&#39;s digital wellbeing prompts after extended scrolling. </p>
+    <p><strong>How to Avoid:</strong> </p>
+    <p><strong>Alternative Designs:</strong> Infinite Scroll Paged Content </p>
+  </article>
+
+    </main>
+
+    
+    
+  </body>
+</html>

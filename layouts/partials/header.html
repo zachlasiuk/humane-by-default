@@ -1,0 +1,109 @@
+<header class="site-header">
+    <nav class="main-nav">
+      <ul>
+        <li class="left-align"><a href="{{ "/" | relLangURL }}"><img src="{{ "/img/logo.png" | relURL }}" alt="Humane By Default Logo" style="height: 100px;"></a></li>
+        <li><a href="{{ "/design_patterns/" | relLangURL }}">Design Patterns</a></li>
+        <li><a href="{{ "/business_models/" | relLangURL }}">Business Models</a></li>
+        <li><a href="{{ "/resources/" | relLangURL }}">Resources</a></li>
+        <li><a href="{{ "/about/" | relLangURL }}">About</a></li>
+        <li><a href="https://github.com/YOUR_GH_REPO" target="_blank">GitHub</a></li>
+        <li>
+          <button class="contact-btn" onclick="document.getElementById('contact-modal').style.display='block'">
+            Contact Us
+          </button>
+        </li>
+      </ul>
+    </nav>
+</header>
+
+<div id="contact-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('contact-modal').style.display='none'">&times;</span>
+        <h2>Contact Us</h2>
+        <p>Sign up to help or get involved.</p>
+        <!-- You can embed a form or a mailto link here -->
+        <form>
+        <label>Name</label>
+        <input type="text" name="name" />
+        <label>Email</label>
+        <input type="email" name="email" />
+        <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+
+<style>
+
+    /* Header Styles */
+    .site-header {
+        background-color: var(--black-bg);
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      
+  /* Navigation Styles */
+  .main-nav {
+    margin-top: 15px;
+  }
+  
+  .main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .main-nav li {
+    margin: 0 16px;
+  }
+  
+  .main-nav .left-align {
+    margin-right: auto;
+  }
+  
+  .main-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s;
+  }
+  
+  .main-nav a:hover {
+    color: #f39c12;
+  }
+  
+  /* Contact Button Styles */
+  .contact-btn {
+    background-color: #f39c12;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .contact-btn:hover {
+    background-color: #e67e22;
+  }
+  
+  /* Responsive Tweaks */
+  @media (max-width: 768px) {
+    .main-nav ul {
+      flex-direction: column;
+    }
+    
+    .main-nav li {
+      margin: 10px 0;
+    }
+    
+    .main-nav .left-align {
+      margin-right: 0;
+    }
+  }
+  
+</style>
