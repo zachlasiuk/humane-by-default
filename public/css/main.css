@@ -1,18 +1,21 @@
 /* Global Styles */
+:root {
+    --black-bg: #080225;
+    --green-main: #2A964A;
+    --green-light: #7EBF91;
+    --green-dark: #1E6E36;
+    --purple-dark: #211B3B;
+}
+/* Global Styles */
 body {
     font-family: 'Aeonik', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-}
-
-:root {
-    --black-bg: #080225;
-    --secondary-color: #fff;
-    --accent-color: #f39c12;
-    --accent-hover-color: #e67e22;
+    background-color: var(--black-bg);
+    min-height: 100vh;
+    color: white;
 }
 
 main {
-    padding-left: 16px;
-    padding-right: 16px;
+    
 }

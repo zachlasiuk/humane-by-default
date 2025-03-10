@@ -4,20 +4,23 @@
 	<meta name="generator" content="Hugo 0.140.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8" />
     <title>Humane By Default - </title>
-    <link rel="stylesheet" href="/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/main.css">
 
   </head>
   <body>
     <header class="site-header">
     <nav class="main-nav">
       <ul>
-        <li class="left-align"><a href="/"><img src="/img/logo.png" alt="Humane By Default Logo" style="height: 100px;"></a></li>
-        <li><a href="/design_patterns/">Design Patterns</a></li>
-        <li><a href="/business_models/">Business Models</a></li>
-        <li><a href="/resources/">Resources</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="https://github.com/YOUR_GH_REPO" target="_blank">GitHub</a></li>
-        <li>
+        <li class="left-align"><a href="/"><img src="/img/logo_rectangle.png" alt="Humane By Default Logo" style="height: 100px;"></a></li>
+        <li class="menu-icon" onclick="toggleMenu()">&#9776;</li>
+        <li class="nav-item"><a href="/design_patterns/">Design Patterns</a></li>
+        <li class="nav-item"><a href="/business_models/">Business Models</a></li>
+        <li class="nav-item"><a href="/resources/">Resources</a></li>
+        <li class="nav-item"><a href="/about/">About</a></li>
+        <li class="nav-item"><a href="https://github.com/YOUR_GH_REPO" target="_blank">GitHub</a></li>
+        <li class="nav-item">
           <button class="contact-btn" onclick="document.getElementById('contact-modal').style.display='block'">
             Contact Us
           </button>
@@ -42,81 +45,110 @@
     </div>
 </div>
 
-
 <style>
-
      
     .site-header {
         background-color: var(--black-bg);
         color: #fff;
-        padding: 20px;
+        padding-left: 16px;
+        padding-right: 16px;
         text-align: center;
-      }
+        border-bottom: white 1px solid;
+    }
       
-   
-  .main-nav {
-    margin-top: 15px;
-  }
+     
+    .main-nav {
+        margin-top: 8px;
+    }
   
-  .main-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .main-nav li {
-    margin: 0 16px;
-  }
-  
-  .main-nav .left-align {
-    margin-right: auto;
-  }
-  
-  .main-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1em;
-    transition: color 0.3s;
-  }
-  
-  .main-nav a:hover {
-    color: #f39c12;
-  }
-  
-   
-  .contact-btn {
-    background-color: #f39c12;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    color: #fff;
-    transition: background-color 0.3s;
-  }
-  
-  .contact-btn:hover {
-    background-color: #e67e22;
-  }
-  
-   
-  @media (max-width: 768px) {
     .main-nav ul {
-      flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-    
-    .main-nav li {
-      margin: 10px 0;
-    }
-    
-    .main-nav .left-align {
-      margin-right: 0;
-    }
-  }
   
+    .main-nav li {
+        margin: 0 16px;
+    }
+  
+    .main-nav .left-align {
+        margin-right: auto;
+    }
+  
+    .main-nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.25em;
+        transition: color 0.3s;
+    }
+  
+    .main-nav a:hover {
+        color: var(--green-light);
+    }
+  
+     
+    .contact-btn {
+        background-color: var(--green-main);
+        border: none;
+        padding: 8px 16px;
+        font-size: 1.25em;
+        cursor: pointer;
+        color: #fff;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+    }
+  
+    .contact-btn:hover {
+        background-color: var(--green-dark);
+    }
+  
+     
+    @media (max-width: 1024px) {
+        .main-nav ul {
+            flex-direction: row;
+        }
+        
+        .main-nav .nav-item {
+            display: none;
+        }
+        
+        .main-nav .menu-icon {
+            display: block;
+            cursor: pointer;
+            font-size: 2em;
+        }
+    }
+  
+    @media (max-width: 768px) {
+        .main-nav ul {
+            flex-direction: column;
+        }
+        
+        .main-nav li {
+            margin: 10px 0;
+        }
+        
+        .main-nav .left-align {
+            margin-right: 0;
+        }
+    }
 </style>
+
+<script>
+    function toggleMenu() {
+        var items = document.querySelectorAll('.nav-item');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].style.display === 'block') {
+                items[i].style.display = 'none';
+            } else {
+                items[i].style.display = 'block';
+            }
+        }
+    }
+</script>
 
     <main>
       
@@ -127,6 +159,15 @@
 
   </div>
 </section>
+<style>
+  .homepage {
+    padding: 16px;
+  }
+
+
+</style>
+
+
 
     </main>
 

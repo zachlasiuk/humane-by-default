@@ -12,13 +12,14 @@
     <header class="site-header">
     <nav class="main-nav">
       <ul>
-        <li class="left-align"><a href="/"><img src="/img/logo.png" alt="Humane By Default Logo" style="height: 100px;"></a></li>
-        <li><a href="/design_patterns/">Design Patterns</a></li>
-        <li><a href="/business_models/">Business Models</a></li>
-        <li><a href="/resources/">Resources</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="https://github.com/YOUR_GH_REPO" target="_blank">GitHub</a></li>
-        <li>
+        <li class="left-align"><a href="/"><img src="/img/logo_rectangle.png" alt="Humane By Default Logo" style="height: 100px;"></a></li>
+        <li class="menu-icon" onclick="toggleMenu()">&#9776;</li>
+        <li class="nav-item"><a href="/design_patterns/">Design Patterns</a></li>
+        <li class="nav-item"><a href="/business_models/">Business Models</a></li>
+        <li class="nav-item"><a href="/resources/">Resources</a></li>
+        <li class="nav-item"><a href="/about/">About</a></li>
+        <li class="nav-item"><a href="https://github.com/YOUR_GH_REPO" target="_blank">GitHub</a></li>
+        <li class="nav-item">
           <button class="contact-btn" onclick="document.getElementById('contact-modal').style.display='block'">
             Contact Us
           </button>
@@ -43,81 +44,110 @@
     </div>
 </div>
 
-
 <style>
-
      
     .site-header {
         background-color: var(--black-bg);
         color: #fff;
-        padding: 20px;
+        padding-left: 16px;
+        padding-right: 16px;
         text-align: center;
-      }
+        border-bottom: white 1px solid;
+    }
       
-   
-  .main-nav {
-    margin-top: 15px;
-  }
+     
+    .main-nav {
+        margin-top: 8px;
+    }
   
-  .main-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .main-nav li {
-    margin: 0 16px;
-  }
-  
-  .main-nav .left-align {
-    margin-right: auto;
-  }
-  
-  .main-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1em;
-    transition: color 0.3s;
-  }
-  
-  .main-nav a:hover {
-    color: #f39c12;
-  }
-  
-   
-  .contact-btn {
-    background-color: #f39c12;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    color: #fff;
-    transition: background-color 0.3s;
-  }
-  
-  .contact-btn:hover {
-    background-color: #e67e22;
-  }
-  
-   
-  @media (max-width: 768px) {
     .main-nav ul {
-      flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-    
-    .main-nav li {
-      margin: 10px 0;
-    }
-    
-    .main-nav .left-align {
-      margin-right: 0;
-    }
-  }
   
+    .main-nav li {
+        margin: 0 16px;
+    }
+  
+    .main-nav .left-align {
+        margin-right: auto;
+    }
+  
+    .main-nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.25em;
+        transition: color 0.3s;
+    }
+  
+    .main-nav a:hover {
+        color: var(--green-light);
+    }
+  
+     
+    .contact-btn {
+        background-color: var(--green-main);
+        border: none;
+        padding: 8px 16px;
+        font-size: 1.25em;
+        cursor: pointer;
+        color: #fff;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+    }
+  
+    .contact-btn:hover {
+        background-color: var(--green-dark);
+    }
+  
+     
+    @media (max-width: 1024px) {
+        .main-nav ul {
+            flex-direction: row;
+        }
+        
+        .main-nav .nav-item {
+            display: none;
+        }
+        
+        .main-nav .menu-icon {
+            display: block;
+            cursor: pointer;
+            font-size: 2em;
+        }
+    }
+  
+    @media (max-width: 768px) {
+        .main-nav ul {
+            flex-direction: column;
+        }
+        
+        .main-nav li {
+            margin: 10px 0;
+        }
+        
+        .main-nav .left-align {
+            margin-right: 0;
+        }
+    }
 </style>
+
+<script>
+    function toggleMenu() {
+        var items = document.querySelectorAll('.nav-item');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].style.display === 'block') {
+                items[i].style.display = 'none';
+            } else {
+                items[i].style.display = 'block';
+            }
+        }
+    }
+</script>
 
     <main>
       
@@ -133,7 +163,6 @@
     .filter-panel {
       width: 400px;
       padding: 20px;
-      background: #f5f5f5;
       position: relative;
     }
     .filter-panel h3 { margin-bottom: 15px; }
@@ -152,7 +181,7 @@
         transform: translateX(-100%);
         width: 300px;
         height: 100%;
-        background: #f5f5f5;
+        background: var(--purple-dark);
         padding: 20px;
         transition: transform 0.3s ease;
         z-index: 1000;
@@ -283,93 +312,110 @@
       
       <div>
         <strong>Use-case</strong>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Social Media" value="social-media">
-          Social Media
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Streaming platforms" value="streaming-platforms">
-          Streaming platforms
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Content sites" value="content-heavy-sites">
-          Content sites
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Subscriptions" value="subscriptions">
-          Subscriptions
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="General" value="general">
-          General
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Sales" value="sales">
-          Sales
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Marketing" value="marketing">
-          Marketing
-        </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Social Media" value="social-media">
+            Social Media
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Streaming Platforms" value="streaming-platforms">
+            Streaming Platforms
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Subscriptions" value="subscriptions">
+            Subscriptions
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Sales" value="sales">
+            Sales
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Marketing" value="marketing">
+            Marketing
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usecase" data-display-name="Social Media" value="social-media">
+            Social Media
+          </label>
+        
       </div>
 
       
       <div>
         <strong>User goal</strong>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Consume information" value="consume-information">
-          Consume information
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Try a service" value="try-a-service">
-          Try a service
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Control privacy" value="control-privacy">
-          Control privacy
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Saying no" value="saying-no">
-          Saying no
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Making a decision" value="making-a-decision">
-          Making a decision
-        </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Consume information" value="consume-information">
+            Consume information
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Try a service" value="try-a-service">
+            Try a service
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Control privacy" value="control-privacy">
+            Control privacy
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Saying no" value="saying-no">
+            Saying no
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="usergoal" data-display-name="Making a decision" value="making-a-decision">
+            Making a decision
+          </label>
+        
       </div>
 
       
       <div>
-        <strong>Business objective</strong>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Increase engagement" value="increase-engagement">
-          Increase engagement
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Close sales" value="close-sales">
-          Close sales
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Sell user data" value="sell-user-data">
-          Sell user data
-        </label>
+        <strong>Business Objective</strong>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Increase engagement" value="increase-engagement">
+            Increase engagement
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Close sales" value="close-sales">
+            Close sales
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="bizobj" data-display-name="Sell user data" value="sell-user-data">
+            Sell user data
+          </label>
+        
       </div>
 
       
       <div>
         <strong>Values</strong>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Agency" value="agency">
-          Agency
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Manipulation" value="manipulation">
-          Manipulation
-        </label>
-        <label>
-          <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Privacy" value="privacy">
-          Privacy
-        </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Agency" value="agency">
+            Agency
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Manipulation" value="manipulation">
+            Manipulation
+          </label>
+        
+          <label>
+            <input type="checkbox" class="filter-checkbox" data-filter-type="values" data-display-name="Privacy" value="privacy">
+            Privacy
+          </label>
+        
       </div>
     </aside>
 
